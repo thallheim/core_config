@@ -26,6 +26,7 @@ vim.keymap.set('n', '¤', '$', { remap=false, desc = '¤ to $ for easier EOL jum
 vim.keymap.set('n', '<C-t>', ':TagbarToggle<CR>', { remap=false, desc = 'Toggle Tagbar visibility' })
 vim.keymap.set('n', '<C-f>', ':NERDTreeToggle<CR>', { remap=false, desc = 'Toggle NERDTree visibility' })
 -------------------------------------------
+
 --
 -- END OF SETTINGS, (eventually)
 
@@ -74,6 +75,14 @@ require('lualine/config')
 require('lsp/config')
 require('mason/config')
 
+
+-------------------------------------------
+--- RUST-TOOLS SETTINGS 		(rust-analyzer)
+-------------------------------------------
+require('rust-tools').inlay_hints.set() 		-- Set inlay hints on curr. buff.
+-- require('lsp/config').inlay_hints.set() 		-- Set inlay hints on curr. buff.
+
+-------------------------------------------
 -------------------------------------------
 --- SET THEME
 -------------------------------------------
