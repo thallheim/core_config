@@ -79,7 +79,7 @@ require('mason/config')
 -------------------------------------------
 --- RUST-TOOLS SETTINGS 		(rust-analyzer)
 -------------------------------------------
-require('rust-tools').inlay_hints.set() 		-- Set inlay hints on curr. buff.
+require('rust-tools').inlay_hints.enable() 		-- Set inlay hints on curr. buff.
 -- require('lsp/config').inlay_hints.set() 		-- Set inlay hints on curr. buff.
 
 -------------------------------------------
