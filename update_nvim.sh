@@ -1,4 +1,4 @@
-!#bin/bash
+#!/bin/sh
 
 # Copies current nvim init.lua to current dir and overwrites it.
 # Copies from ~/.config/nvim/init.lua
