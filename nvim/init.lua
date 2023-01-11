@@ -33,31 +33,34 @@ vim.keymap.set('n', '<C-f>', ':NERDTreeToggle<CR>', { remap=false, desc = 'Toggl
 local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
-
 -------------------------------------------
 --- LOAD PLUGINS
 -------------------------------------------
 
+--- LSP + AUTOCOMPLETE
+Plug('williamboman/mason.nvim')
+Plug('williamboman/mason-lspconfig.nvim')
+Plug('neovim/nvim-lspconfig')
+Plug('simrat39/rust-tools.nvim')
+
+-- DEBUGGING
+Plug('nvim-lua/plenary.nvim')
+Plug('mfussenegger/nvim-dap')
+
 --- UTILITIES
 Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTree'}})
 Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
--- Plug('vim-airline/vim-airline')
 Plug('nvim-lualine/lualine.nvim')
-Plug('neoclide/coc.nvim', {branch = 'release'})
+-- Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('preservim/tagbar')
--- gcc to toggle line comment (gc(motion))
-Plug('tpope/vim-commentary')
+Plug('tpope/vim-commentary') -- gcc to toggle line comment (gc(motion))
 Plug('tpope/vim-surround')
-
 
 --- VISUALS/COLOURS
 Plug('folke/tokyonight.nvim', {branch = 'main'})
 Plug('ellisonleao/gruvbox.nvim')
 Plug('kyazdani42/nvim-web-devicons')
--- Plug('vim-airline/vim-airline-themes')
-
-
 
 vim.call('plug#end')
 -------------------------------------------
@@ -68,7 +71,8 @@ vim.call('plug#end')
 --- LOAD CONFIGS				from ./lua/..
 -------------------------------------------
 require('lualine/config')
-
+require('lsp/config')
+require('mason/config')
 
 -------------------------------------------
 --- SET THEME
