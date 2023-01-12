@@ -1,6 +1,3 @@
-
-
-
 -------------------------------------------
 --- GENERAL OPTIONS
 -------------------------------------------
@@ -16,6 +13,13 @@ vim.opt.breakindent = true -- preserve indentation of virtual lines
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab= false -- whether or not to turn Tab char into spaces
+vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'} --menuone=show when only one match | noselect=do not autoselect | noinsert=do not autoinsert
+vim.opt.shortmess = vim.opt.shortmess + { c = true}
+vim.api.nvim_set_option('updatetime', 300)
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 -------------------------------------------
 
 -------------------------------------------
@@ -38,11 +42,21 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 --- LOAD PLUGINS
 -------------------------------------------
 
---- LSP + AUTOCOMPLETE
+--- LSP
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
 Plug('neovim/nvim-lspconfig')
 Plug('simrat39/rust-tools.nvim')
+
+--- COMPLETION & SNIPPETS
+Plug('hrsh7th/cmp-buffer')
+Plug('hrsh7th/cmp-nvim-lsp')
+Plug('hrsh7th/cmp-nvim-lsp-signature-help')
+Plug('hrsh7th/cmp-nvim-lua')
+Plug('hrsh7th/cmp-path')
+Plug('hrsh7th/cmp-vsnip')
+Plug('hrsh7th/nvim-cmp')
+Plug('hrsh7th/vim-vsnip')
 
 -- DEBUGGING
 Plug('nvim-lua/plenary.nvim')
@@ -74,14 +88,29 @@ vim.call('plug#end')
 require('lualine/config')
 require('lsp/config')
 require('mason/config')
-
+require('completion/config')
+require('treesitter/config')
 
 -------------------------------------------
 --- RUST-TOOLS SETTINGS 		(rust-analyzer)
 -------------------------------------------
-require('rust-tools').inlay_hints.enable() 		-- Set inlay hints on curr. buff.
--- require('lsp/config').inlay_hints.set() 		-- Set inlay hints on curr. buff.
+require('rust-tools').inlay_hints.enable() 	-- Set inlay hints: all buffers.
+-- require('lsp/config').inlay_hints.set() 	-- Set inlay hints: curr. buffer.
 
+-------------------------------------------
+--- LSP CONFIG (Diagnostics Options Setup)
+-------------------------------------------
+local sign = function(opts)
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = ''
+  })
+end
+-------------------------------------------
+
+-------------------------------------------
+--- COMPLETION CONFIG 
 -------------------------------------------
 -------------------------------------------
 --- SET THEME
