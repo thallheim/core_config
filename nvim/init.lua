@@ -66,7 +66,6 @@ Plug('mfussenegger/nvim-dap')
 Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTree'}})
 Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
 Plug('nvim-lualine/lualine.nvim')
--- Plug('neoclide/coc.nvim', {branch = 'release'})
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('preservim/tagbar')
 Plug('tpope/vim-commentary') -- gcc to toggle line comment (gc(motion))
@@ -76,6 +75,7 @@ Plug('tpope/vim-surround')
 Plug('folke/tokyonight.nvim', {branch = 'main'})
 Plug('ellisonleao/gruvbox.nvim')
 Plug('kyazdani42/nvim-web-devicons')
+Plug('tanvirtin/monokai.nvim')
 
 vim.call('plug#end')
 -------------------------------------------
@@ -116,5 +116,7 @@ end
 --- SET THEME
 -------------------------------------------
 -- require('gruvbox').load()
-require('tokyonight').load()
+-- require('tokyonight').load()
+-- require('monokai').setup {}
+require('monokai').setup { palette = require('monokai').pro }
 ---------------------------------
