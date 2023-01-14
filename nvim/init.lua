@@ -12,7 +12,7 @@ vim.opt.wrap = true
 vim.opt.breakindent = true -- preserve indentation of virtual lines
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.expandtab= false -- whether or not to turn Tab char into spaces
+vim.opt.expandtab = false -- whether or not to turn Tab char into spaces
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'} --menuone=show when only one match | noselect=do not autoselect | noinsert=do not autoinsert
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
 vim.api.nvim_set_option('updatetime', 300)
@@ -41,7 +41,6 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
 -------------------------------------------
 --- LOAD PLUGINS
 -------------------------------------------
-
 --- LSP
 Plug('williamboman/mason.nvim')
 Plug('williamboman/mason-lspconfig.nvim')
@@ -65,17 +64,19 @@ Plug('mfussenegger/nvim-dap')
 --- UTILITIES
 Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTree'}})
 Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
-Plug('nvim-lualine/lualine.nvim')
+Plug('vim-airline/vim-airline')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('preservim/tagbar')
 Plug('tpope/vim-commentary') -- gcc to toggle line comment (gc(motion))
 Plug('tpope/vim-surround')
+Plug('romgrk/barbar.nvim')
 
 --- VISUALS/COLOURS
 Plug('folke/tokyonight.nvim', {branch = 'main'})
 Plug('ellisonleao/gruvbox.nvim')
 Plug('kyazdani42/nvim-web-devicons')
 Plug('tanvirtin/monokai.nvim')
+Plug('nvim-lualine/lualine.nvim')
 
 vim.call('plug#end')
 -------------------------------------------
@@ -85,11 +86,12 @@ vim.call('plug#end')
 -------------------------------------------
 --- LOAD CONFIGS				from ./lua/..
 -------------------------------------------
-require('lualine/config')
+-- require('lualine/config') 								-- Something's fucky. 
 require('lsp/config')
 require('mason/config')
 require('completion/config')
 require('treesitter/config')
+require('barbar/keymap')
 
 -------------------------------------------
 --- RUST-TOOLS SETTINGS 		(rust-analyzer)

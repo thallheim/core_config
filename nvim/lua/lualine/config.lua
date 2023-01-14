@@ -5,8 +5,8 @@ require('lualine').setup {
     -- theme = 'monokai_pro',
     -- theme = 'onedark',
     theme = 'molokai',
-    component_separators = { left = '', right = ''},
-    section_separators = { left = '', right = ''},
+    component_separators = { left = '>', right = <''},
+	section_separators = { left = '', right = ''},
     disabled_filetypes = {
       statusline = {},
       winbar = {},
