@@ -29,6 +29,8 @@ vim.keymap.set('n', '§', ':', { remap=false, desc = '§ to : for easier cmd' })
 vim.keymap.set('n', '¤', '$', { remap=false, desc = '¤ to $ for easier EOL jump' })
 vim.keymap.set('n', '<C-t>', ':TagbarToggle<CR>', { remap=false, desc = 'Toggle Tagbar visibility' })
 vim.keymap.set('n', '<C-f>', ':NERDTreeToggle<CR>', { remap=false, desc = 'Toggle NERDTree visibility' })
+vim.keymap.set('n', 'å', '<cmd>lua vim.lsp.buf.hover()<CR>', { remap=false, silent= false, desc = 'Show docs for obj under cursor' })
+
 -------------------------------------------
 
 --
@@ -89,8 +91,7 @@ vim.call('plug#end')
 -------------------------------------------
 -- require('lualine/config') 								-- Something's fucky. 
 require('mason/config')
-require('lsp/rustconfig')
-require('lsp/tsconfig')
+require('lsp/rusttools')
 require('completion/config')
 require('treesitter/config')
 require('barbar/keymap')
