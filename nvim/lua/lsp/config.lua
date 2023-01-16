@@ -2,6 +2,8 @@
 -- Mainly configured in main init.lua:
 -- rust-tools does rust-analyzer for ya.
 
+
+--- RUST TOOLS SETUP
 local rt = require("rust-tools")
 
 rt.setup({

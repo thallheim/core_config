@@ -10,8 +10,8 @@ vim.opt.smartcase = true
 vim.opt.hlsearch = false -- highlight results of prev. search
 vim.opt.wrap = true
 vim.opt.breakindent = true -- preserve indentation of virtual lines
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.expandtab = false -- whether or not to turn Tab char into spaces
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'} --menuone=show when only one match | noselect=do not autoselect | noinsert=do not autoinsert
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
@@ -58,8 +58,8 @@ Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/vim-vsnip')
 
 -- DEBUGGING
-Plug('nvim-lua/plenary.nvim')
-Plug('mfussenegger/nvim-dap')
+-- Plug('nvim-lua/plenary.nvim')
+-- Plug('mfussenegger/nvim-dap')
 
 --- UTILITIES
 Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTree'}})
@@ -76,7 +76,7 @@ Plug('folke/tokyonight.nvim', {branch = 'main'})
 Plug('ellisonleao/gruvbox.nvim')
 Plug('kyazdani42/nvim-web-devicons')
 Plug('tanvirtin/monokai.nvim')
-Plug('nvim-lualine/lualine.nvim')
+-- Plug('nvim-lualine/lualine.nvim')
 
 vim.call('plug#end')
 -------------------------------------------
@@ -87,8 +87,8 @@ vim.call('plug#end')
 --- LOAD CONFIGS				from ./lua/..
 -------------------------------------------
 -- require('lualine/config') 								-- Something's fucky. 
-require('lsp/config')
 require('mason/config')
+require('lsp/config')
 require('completion/config')
 require('treesitter/config')
 require('barbar/keymap')
@@ -98,6 +98,15 @@ require('barbar/keymap')
 -------------------------------------------
 require('rust-tools').inlay_hints.enable() 	-- Set inlay hints: all buffers.
 -- require('lsp/config').inlay_hints.set() 	-- Set inlay hints: curr. buffer.
+
+
+-------------------------------------------
+--- DENO LSP SETUP
+-------------------------------------------
+vim.g.markdown_fenced_languages = {
+  "ts=typescript"
+}
+require('lspconfig').denols.setup{}
 
 -------------------------------------------
 --- LSP CONFIG (Diagnostics Options Setup)
