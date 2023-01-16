@@ -101,12 +101,18 @@ require('rust-tools').inlay_hints.enable() 	-- Set inlay hints: all buffers.
 
 
 -------------------------------------------
---- DENO LSP SETUP
+--- LSP LOAD
 -------------------------------------------
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
 require('lspconfig').denols.setup{}
+-- Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+require('lspconfig').jsonls.setup{
+	capabilities = capabilities,
+}
 
 -------------------------------------------
 --- LSP CONFIG (Diagnostics Options Setup)
