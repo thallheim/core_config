@@ -56,6 +56,7 @@ Plug('hrsh7th/cmp-path')
 Plug('hrsh7th/cmp-vsnip')
 Plug('hrsh7th/nvim-cmp')
 Plug('hrsh7th/vim-vsnip')
+Plug('chrisgrieser/cmp-nerdfont')
 
 -- DEBUGGING
 -- Plug('nvim-lua/plenary.nvim')
@@ -88,7 +89,8 @@ vim.call('plug#end')
 -------------------------------------------
 -- require('lualine/config') 								-- Something's fucky. 
 require('mason/config')
-require('lsp/config')
+require('lsp/rustconfig')
+require('lsp/tsconfig')
 require('completion/config')
 require('treesitter/config')
 require('barbar/keymap')
