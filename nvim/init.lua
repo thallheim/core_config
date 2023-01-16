@@ -106,7 +106,13 @@ require('rust-tools').inlay_hints.enable() 	-- Set inlay hints: all buffers.
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
-require('lspconfig').denols.setup{}
+require('lspconfig').denols.setup{
+	filetypes = { ".ts", ".tsx" }
+}
+require('lspconfig').tsserver.setup{
+	filetypes = { "javascript", "javascript.jsx", "javascriptreact" },
+	hostInfo = "neovim"
+}
 -- Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
