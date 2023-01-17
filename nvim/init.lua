@@ -122,11 +122,10 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require('lspconfig').jsonls.setup{
 	capabilities = capabilities,
 }
-
 -- require('lspconfig').vuels.setup{}
 require('lspconfig').volar.setup{}
-
 require('lspconfig').html.setup{}
+require('lspconfig').astro.setup{}
 
 -------------------------------------------
 --- LSP CONFIG (Diagnostics Options Setup)
