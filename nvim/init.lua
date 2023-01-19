@@ -12,7 +12,7 @@ vim.opt.wrap = true
 vim.opt.breakindent = true -- preserve indentation of virtual lines
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = false -- whether or not to turn Tab char into spaces
+vim.opt.expandtab = true -- whether or not to turn Tab char into spaces
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'} --menuone=show when only one match | noselect=do not autoselect | noinsert=do not autoinsert
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
 vim.api.nvim_set_option('updatetime', 300)
@@ -30,6 +30,7 @@ vim.keymap.set('n', '¤', '$', { remap=false, desc = '¤ to $ for easier EOL jum
 vim.keymap.set('n', '<C-t>', ':TagbarToggle<CR>', { remap=false, desc = 'Toggle Tagbar visibility' })
 vim.keymap.set('n', '<C-f>', ':NERDTreeToggle<CR>', { remap=false, desc = 'Toggle NERDTree visibility' })
 vim.keymap.set('n', 'å', '<cmd>lua vim.lsp.buf.hover()<CR>', { remap=false, silent= false, desc = 'Show docs for obj under cursor' })
+vim.keymap.set('n', '<C-å>', '<cmd>lua vim.lsp.buf.hover()', { remap=false, silent= false, desc = 'Show docs for obj under cursor' })
 
 -------------------------------------------
 
@@ -67,8 +68,9 @@ Plug('chrisgrieser/cmp-nerdfont')
 --- UTILITIES
 Plug('scrooloose/nerdtree', {on = {'NERDTreeToggle', 'NERDTree'}})
 Plug('junegunn/fzf', {['do'] = vim.fn['fzf#install']})
-Plug('vim-airline/vim-airline')
-Plug('vim-airline/vim-airline-themes')
+-- Plug('vim-airline/vim-airline')
+-- Plug('vim-airline/vim-airline-themes')
+Plug('nvim-lualine/lualine.nvim')
 Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
 Plug('preservim/tagbar')
 Plug('tpope/vim-commentary') -- gcc to toggle line comment (gc(motion))
@@ -80,6 +82,8 @@ Plug('folke/tokyonight.nvim', {branch = 'main'})
 Plug('ellisonleao/gruvbox.nvim')
 Plug('kyazdani42/nvim-web-devicons')
 Plug('tanvirtin/monokai.nvim')
+Plug('Shatur/neovim-ayu')
+Plug('RRethy/nvim-base16')
 
 vim.call('plug#end')
 -------------------------------------------
@@ -89,7 +93,7 @@ vim.call('plug#end')
 -------------------------------------------
 --- LOAD CONFIGS				from ./lua/..
 -------------------------------------------
--- require('lualine/config') 								-- Something's fucky. 
+require('lualine/config') 								-- Something's fucky. 
 require('mason/config')
 require('lsp/rusttools')
 require('completion/config')
@@ -140,14 +144,18 @@ end
 -------------------------------------------
 
 -------------------------------------------
---- COMPLETION CONFIG 
+--- LOAD LUALINE 
+require('lualine').setup{
+    options = { theme = 'auto' }
+}
 -------------------------------------------
 -------------------------------------------
 --- SET THEME
 -------------------------------------------
-require('gruvbox').load()
+-- require('gruvbox').load()
 -- require('tokyonight').load()
 -- require('monokai').setup {}
 -- require('monokai').setup { palette = require('monokai').pro }
 -- require('monokai').setup { palette = require('monokai').ristretto}
+vim.cmd('colorscheme base16-tokyo-city-terminal-dark')
 ---------------------------------
