@@ -130,7 +130,7 @@ require('lspconfig').jsonls.setup{
 require('lspconfig').volar.setup{}
 require('lspconfig').html.setup{}
 require('lspconfig').astro.setup{}
-
+require'lspconfig'.cssls.setup{}
 -------------------------------------------
 --- LSP CONFIG (Diagnostics Options Setup)
 -------------------------------------------
