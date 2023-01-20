@@ -21,7 +21,23 @@
   (tool-bar-mode -1)
   ; (menu-bar-mode -1)
   (scroll-bar-mode -1)
-  (defalias 'yes-or-no-p 'y-or-n-p)
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; BUFFER-EXPOSE
+;; https://github.com/clemera/buffer-expose
+(buffer-expose-mode 1)
+
+ (defvar buffer-expose-mode-map
+   (let ((map (make-sparse-keymap)))
+     (define-key map (kbd "<s-tab>") 'buffer-expose)
+     (define-key map (kbd "<C-tab>") 'buffer-expose-no-stars)
+     (define-key map (kbd "C-c <C-tab>") 'buffer-expose-current-mode)
+     (define-key map (kbd "C-c C-m") 'buffer-expose-major-mode)
+     (define-key map (kbd "C-c C-d") 'buffer-expose-dired-buffers)
+     (define-key map (kbd "C-c C-*") 'buffer-expose-stars)
+     map)
+   "Mode map for command `buffer-expose-mode'.")
+
 
 ;; Theme
   (use-package exotica-theme
@@ -29,20 +45,33 @@
     :config (load-theme 'deeper-blue t))
 
 ;; JS-runetime... runner..
-    (require 'js-comint)
-    (setq `js-comint-program-command "/usr/bin/node")
-    (add-hook 'js2-mode-hook
-            (lambda ()
-              (local-set-key (kbd "C-x C-e") 'js-send-last-sexp)
-              (local-set-key (kbd "C-c b") 'js-send-buffer)))
-;; Sensible line breaking
-  (add-hook 'text-mode-hook 'visual-line-mode)
+;;    (require 'js-comint)
+;;    (setq `js-comint-program-command "/usr/bin/node")
+;;    (add-hook 'js2-mode-hook
+;;            (lambda ()
+;;              (local-set-key (kbd "C-x C-e") 'js-send-last-sexp)
+;;              (local-set-key (kbd "C-c b") 'js-send-buffer)))
+
+
+(add-hook 'text-mode-hook 'visual-line-mode)            ;; Sensible line breaking
   
-;; Overwrite selected text
-  (delete-selection-mode t)
+
+  (delete-selection-mode t)                             ;; Overwrite selected text 
   
-;; Scroll to the first and last line of the buffer
-  (setq scroll-error-top-bottom t)
+
+  (setq scroll-error-top-bottom t)         ;; Scroll to the first and last line of the buffer
+
+
+(require 'ido)      ;; Enable IDO  
+(ido-mode t)
+;; Display ido results vertically, rather than horizontally
+(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+
+;; Smex
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands)
+  ;; This is your old M-x.
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; fuck yeah which-key!
 (use-package which-key
