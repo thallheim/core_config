@@ -7,19 +7,19 @@ vim.opt.cursorline = true
 vim.opt.mouse = 'a'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
-vim.opt.hlsearch = false -- highlight results of prev. search
+vim.opt.hlsearch = false                -- highlight results of prev. search
 vim.opt.wrap = true
-vim.opt.breakindent = true -- preserve indentation of virtual lines
+vim.opt.breakindent = true              -- preserve indentation of virtual lines
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true -- whether or not to turn Tab char into spaces
+vim.opt.expandtab = true                -- whether or not to turn Tab char into spaces
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'} --menuone=show when only one match | noselect=do not autoselect | noinsert=do not autoinsert
 vim.opt.shortmess = vim.opt.shortmess + { c = true}
 vim.api.nvim_set_option('updatetime', 300)
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])
+-- vim.cmd([[                           -- Show diagnostics while cursor is on affected line
+-- set signcolumn=yes
+-- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+-- ]])
 -------------------------------------------
 
 -------------------------------------------
@@ -30,7 +30,7 @@ vim.keymap.set('n', '¤', '$', { remap=false, desc = '¤ to $ for easier EOL jum
 vim.keymap.set('n', '<C-t>', ':TagbarToggle<CR>', { remap=false, desc = 'Toggle Tagbar visibility' })
 vim.keymap.set('n', '<C-f>', ':NERDTreeToggle<CR>', { remap=false, desc = 'Toggle NERDTree visibility' })
 vim.keymap.set('n', 'å', '<cmd>lua vim.lsp.buf.hover()<CR>', { remap=false, silent= false, desc = 'Show docs for obj under cursor' })
-vim.keymap.set('n', '<C-å>', '<cmd>lua vim.lsp.buf.hover()', { remap=false, silent= false, desc = 'Show docs for obj under cursor' })
+vim.keymap.set('n', '<M-å>', '<cmd>lua vim.diagnostic.open_float(nil, { focusable = false })<CR>', { remap=false, silent= false, desc = 'Show diagnostic under cursor' })
 
 -------------------------------------------
 
@@ -94,9 +94,10 @@ vim.call('plug#end')
 -------------------------------------------
 --- LOAD CONFIGS				from ./lua/..
 -------------------------------------------
-require('lualine/config') 								-- Something's fucky. 
+require('lualine/config')
 require('mason/config')
 require('lsp/rusttools')
+-- require('lsp/config')
 require('completion/config')
 require('treesitter/config')
 require('barbar/keymap')
@@ -142,6 +143,7 @@ local sign = function(opts)
     numhl = ''
   })
 end
+
 -------------------------------------------
 
 -------------------------------------------
