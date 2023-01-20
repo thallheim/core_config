@@ -76,6 +76,7 @@ Plug('preservim/tagbar')
 Plug('tpope/vim-commentary') -- gcc to toggle line comment (gc(motion))
 Plug('tpope/vim-surround')
 Plug('romgrk/barbar.nvim')
+Plug('mg979/vim-visual-multi')
 
 --- VISUALS/COLOURS
 Plug('folke/tokyonight.nvim', {branch = 'main'})
@@ -130,7 +131,7 @@ require('lspconfig').jsonls.setup{
 require('lspconfig').volar.setup{}
 require('lspconfig').html.setup{}
 require('lspconfig').astro.setup{}
-require'lspconfig'.cssls.setup{}
+require('lspconfig').cssls.setup{}
 -------------------------------------------
 --- LSP CONFIG (Diagnostics Options Setup)
 -------------------------------------------
