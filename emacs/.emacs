@@ -121,8 +121,38 @@
     (setq company-idle-delay 0
           company-minimum-prefix-length 1
           company-selection-wrap-around t))
-  (global-company-mode)
+          (global-company-mode)
+  ; prettier front-end for company
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
+  (global-set-key (kbd "C-c C-l") 'company-complete)
 
-;; More stuff
+
+;; LSP-MODE
+  (use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (less-css-mode . lsp)
+	 (js2-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+  
+  ;; extensions
+  (use-package lsp-ui :commands lsp-ui-mode)
+  ;(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+  ;(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+  ;(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+  
+  ;; Debugger
+  ;;(use-package dap-mode)
+  ;; (use-package dap-LANGUAGE) to load dap adapter for LANGUAGE
+  
+  ;; Which-key integration
+  (use-package which-key
+      :config
+      (which-key-mode))
 
 
