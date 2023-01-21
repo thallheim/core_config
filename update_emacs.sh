@@ -6,7 +6,7 @@
 echo ":: Updating emacs config..."
 cp ~/.emacs ./emacs/.emacs
 echo ":: .emacs copied."
-cp -r ~/.emacs.d/ ./emacs/
-echo ":: config subfolder copied."
-echo ":: Done."
+# cp -r ~/.emacs.d/ ./emacs/
+# echo ":: config subfolder copied."
+# echo ":: Done."
 echo ":! Don't forget to push whatever you changed, yah?"
