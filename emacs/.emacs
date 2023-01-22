@@ -99,7 +99,7 @@
 (require 'ido)      ;; Enable IDO  
 (ido-mode t)
 ;; Display ido results vertically
-(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
+;;(setq ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]" " [No match]" " [Matched]" " [Not readable]" " [Too big]" " [Confirm]")))
 
 ;; Smex
   (global-set-key (kbd "M-x") 'smex)
