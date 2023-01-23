@@ -59,7 +59,7 @@
   :ensure
   :custom
   
-  (company-idle-delay 0.05) ;; how long to wait until popup
+  (company-idle-delay 0.5) ;; how long to wait until popup
   ;; (company-begin-commands nil) ;; uncomment to disable popup
     (global-company-mode)
     (add-hook 'after-init-hook 'global-company-mode)
@@ -198,9 +198,12 @@
   :ensure
   :commands lsp-ui-mode
   :custom
-  (lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable t))
+  (setq lsp-ui-peek-always-show t)
+  (setq lsp-ui-sideline-show-hover t)
+  (setq lsp-ui-headerline-breadcrumb-enable nil)
+  (lsp-ui-doc-enable t)
+  (setq lsp-ui-position 'top))
+
   ; (define-key (kbd "M-ö")  'lsp-ui-imenu)) ; something's fucky 
 
 
@@ -208,3 +211,22 @@
 ;; inline errors
 
 ;; (use-package flycheck :ensure)
+
+;; LOAD THEME(s)
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (load-theme 'doom-one t)
+
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config)
+  ;; Enable custom neotree theme (all-the-icons must be installed!)
+  (doom-themes-neotree-config)
+  ;; or for treemacs users
+  (setq doom-themes-treemacs-theme "doom-atom") ; use "doom-colors" for less minimal icon theme
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification.
+  (doom-themes-org-config))
