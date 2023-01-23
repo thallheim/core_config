@@ -26,6 +26,10 @@
 (setq show-paren-delay 0)
 (setq show-paren-mode 1)
 
+;; QoL
+(setq compile-command "make")    ; set default compile cmd
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+  (add-hook 'rust-mode-hook 'lsp)   ; run cmd 'lsp' when entering rust-mode
 ;; HELM
 (use-package helm)
 (global-set-key (kbd "C-c h t") 'helm-cmd-t)
@@ -55,9 +59,10 @@
   :ensure
   :custom
   
-  (company-idle-delay 0.25) ;; how long to wait until popup
+  (company-idle-delay 0.05) ;; how long to wait until popup
   ;; (company-begin-commands nil) ;; uncomment to disable popup
     (global-company-mode)
+    (add-hook 'after-init-hook 'global-company-mode)
     :bind
   (:map company-active-map
 	      ("C-n". company-select-next)
@@ -107,7 +112,7 @@
   ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
   (setq lsp-keymap-prefix "C-l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
-         ;;(less-css-mode . lsp)
+        (rust-mode . lsp)
 	 ;;(js2-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
@@ -170,22 +175,24 @@
    :ensure
    :commands lsp
    :custom
-   ;; what to use when checking on-save. "check" is defaulty
+   ;; what to use when checking on-save. "check" is default
    (lsp-rust-analyzer-cargo-watch-command "check")
    ;;(lsp-eldoc-render-all t)
    (lsp-idle-delay 0.6)
    ;; This controls the overlays that display type and other hints inline. Enable
-   ;; / disable as you prefer. Well require a `lsp-workspace-restart' to have an
-   ;; effect on open projects.
-   (lsp-rust-analyzer-server-display-inlay-hints t)
+   ;;   / disable as you prefer. Well require a `lsp-workspace-restart' to have an
+   ;;   effect on open projects.
+   (lsp-rust-analyzer-server-display-inlay-hints nil)
    ;(lsp-rust-analyzer-display-lifetime-elision-hints-enable "skip_trivial")
    (lsp-rust-analyzer-display-chaining-hints t)
    ;(lsp-rust-analyzer-display-lifetime-elision-hints-use-parameter-names nil)
-   (lsp-rust-analyzer-display-closure-return-type-hints t)
+   (lsp-rust-analyzer-display-closure-return-type-hints nil)
    (lsp-rust-analyzer-display-parameter-hints nil)
    (lsp-rust-analyzer-display-reborrow-hints nil)
    :config
    (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+   (setq lsp-enable-symbol-highlighting t)
+   (setq lsp-ui-sideline-enable nil)    ; too far right - wraps lines.
 
 (use-package lsp-ui
   :ensure
@@ -193,10 +200,9 @@
   :custom
   (lsp-ui-peek-always-show t)
   (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable nil))
+  (lsp-ui-doc-enable t))
+  ; (define-key (kbd "M-ö")  'lsp-ui-imenu)) ; something's fucky 
 
-
-;;("M-j" . lsp-ui-imenu)
 
 ;; -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 ;; inline errors
